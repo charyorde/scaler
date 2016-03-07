@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <!--meta http-equiv="refresh" content="15" /--><!-- temp hack -->
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link href="/static/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/bootstrap-table.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/static/jquery.fileupload.css">
+    <script src="/static/jquery.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+    <script src="/static/jquery.cookie-1.4.1.min.js"></script>
+    <script src="/static/sockjs.min.js"></script>
+    <script src="/static/stomp.min.js"></script>
+    <script src="/static/bootstrap-table-all.min.js"></script>
+    <script src="/static/jquery.ui.widget.js"></script>
+    <script src="/static/jquery.iframe-transport.js"></script>
+    <script src="/static/jquery.fileupload.js"></script>
+    <script>
+      
+      $(document).ready(function() {
+        $('#fileupload').fileupload({
+          url: '/v1/upload-sheet',
+          dataType: 'json',
+          done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+              $('<p/>').text(file.name).appendTo(document.body);
+            })
+          },
+          progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+              'width',
+              progress + '%'
+            );
+          }
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <h2 class="text-center">Scalable Upload</h2>
+    <div class="container">
+      <div id="audit" class="col-md-12 pretty-cont" style="margin-top:5px; padding-bottom:5px">
+        <h4 class="text-muted">Upload Sheet</h4>
+        <span class="btn btn-success fileinput-button">
+          <i class="glyphicon glyphicon-plus"></i>
+          <span>Select files...</span>
+          <!-- The file input field used as target for the file upload widget -->
+          <input id="fileupload" type="file" name="filedata" multiple>
+        </span><br/><br/>
+        <div id="progress" class="progress">
+          <div class="progress-bar progress-bar-success"></div>
+        </div>
+        <div id="files" class="files"></div>
+        <br>
+      </div>
+    </div>
+  </body>
+</html>

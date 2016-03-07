@@ -1,0 +1,12 @@
+---
+applications:
+- name: scalar
+  memory: 512M
+  instances: 1
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.5.0
+  command: node app.js
+  host: scaler
+  services:
+    - rabbitmq
+    - postgres-test
+

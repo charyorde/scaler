@@ -1,0 +1,30 @@
+{
+    "local": {
+        "driver": "pg",
+        "user": "postgres",
+        "password": "postgres",
+        "host": "localhost",
+        "database": "microapps"
+    },
+
+    "dev": {
+        "driver": "pg",
+        "user": "postgres",
+        "password": "P@ssw0rd15",
+        "host": "10.10.10.221",
+        "database": "postgres"
+    },
+
+    "dev_url": "postgres://postgres:P@ssw0rd15@10.10.10.221:5432/postgres",
+
+    "docker": {
+        "driver": "pg",
+        "user": "postgres",
+        "password": "postgres",
+        "host": "172.17.0.14",
+        "database": "postgres"
+    },
+    "docker_url": "postgres://postgres:postgres@172.17.0.14:5432/postgres",
+
+    "sql-file" : true
+}
